@@ -2,7 +2,7 @@
 
 **Course:** CS616 - Optimization Algorithms  
 **Semester:** 1, AY 2026-2027  
-**Due Date:** December 05, 2026, 11:59 PM  
+**Due Date:** November 11, 2026, 11:59 PM  
 **Instructors:** Dr. Mahdi Khemakhem & Dr. Essra Aldessouki  
 **Total Marks:** 20 + 10% Bonus (5% + 5%)
 
