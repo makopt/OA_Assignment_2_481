@@ -1,8 +1,8 @@
 # Assignment 2: Capacitated Facility Location Problem (TS+GA) — Student Guide
 
 **Course:** CS616 - Optimization Algorithms  
-**Semester:** 2, AY 2025-2026  
-**Due Date:** May 16, 2026, 11:59 PM  
+**Semester:** 1, AY 2026-2027  
+**Due Date:** December 05, 2026, 11:59 PM  
 **Instructors:** Dr. Mahdi Khemakhem & Dr. Essra Aldessouki  
 **Total Marks:** 20 + 10% Bonus (5% + 5%)
 
@@ -17,17 +17,12 @@
 5. [How to Run the Notebook](#5-how-to-run-the-notebook)
 6. [Output Files Structure](#6-output-files-structure)
 7. [Analysis Questions](#7-analysis-questions)
-8. [Bonus Challenges](#8-bonus-challenges-optional--up-to-4-extra-marks)
+8. [Bonus Challenges](#8-bonus-challenges-optional--up-to-10-extra-credit)
 9. [Grading Rubric](#9-grading-rubric)
 10. [Submission Guidelines](#10-submission-guidelines)
 11. [Academic Integrity](#11-academic-integrity)
-12. [Your Analysis and Answers](#12-your-analysis-and-answers)
-    - [Section A: Solution Quality Analysis](#section-a-solution-quality-analysis-4-marks)
-    - [Section B: Computational Efficiency Analysis](#section-b-computational-efficiency-analysis-4-marks)
-    - [Section C: Scalability Analysis](#section-c-scalability-analysis-3-marks)
-    - [Section D: Quality-Time Tradeoff Analysis](#section-d-quality-time-tradeoff-analysis-3-marks)
-    - [Section E: Algorithm Understanding](#section-e-algorithm-understanding-3-marks)
-    - [Section F: Critical Reflection](#section-f-critical-reflection-3-marks)
+12. [Getting Help](#12-getting-help)
+13. [Your Analysis and Answers](#13-your-analysis-and-answers)
 
 ---
 
@@ -38,15 +33,22 @@ In this assignment, you will:
 1. **Study** two complementary metaheuristics for the Capacitated Facility Location Problem (CFLP): **Tabu Search (TS)** and a **Genetic Algorithm (GA)**.
 2. **Compare** both metaheuristics against the exact MIP solver **Gurobi** on 144 test instances.
 3. **Analyze** the performance of each approach in terms of solution quality, computational time, and scalability.
-4. **Document** your findings in this file with detailed, data-driven analysis.
+4. **Document** your findings in `My_Answers.md` with detailed, data-driven analysis.
 
 ### What You Need to Do
 
-✅ **Set your Gurobi version** in the Student Configuration cell (Section 11 of the notebook)  
+✅ **Set your student ID and Gurobi version** in the Student Configuration cell (Section 10 of the notebook)  
 ✅ **Run ALL cells** in the notebook from top to bottom  
 ✅ **Analyze the generated results** (CSV, Excel, convergence plots, visualization plots)  
-✅ **Answer all questions** in Section 13 of this document with specific references to your results  
-✅ **Submit** the notebook + this completed document + all result files  
+✅ **Answer all questions** in `My_Answers.md` with specific references to your results  
+✅ **Submit** the link of your GitHub fork (renamed with your ID and name) on Blackboard - see [Section 10](#10-submission-guidelines)
+
+**IMPORTANT:** You do NOT need to implement anything! All the code is provided. You only need to:
+1. Set `STUDENT_ID` and `GUROBI_VERSION` in the Student Configuration cell (Section 10 of the notebook)
+2. Run all cells in order
+3. Analyze the results and answer the questions in `My_Answers.md`
+
+> **Total experiment runtime: about 10-20 minutes** (depends on your hardware and Gurobi license).
 
 ---
 
@@ -102,15 +104,15 @@ The notebook `Assignment_2.ipynb` is organized into **12 sections**:
 |---------|---------|
 | 1 | Problem introduction and algorithm overview |
 | 2 | Library imports |
-| 3 | CFLP instance generator (144 instances: 3 sizes × 3 difficulties × 16) |
+| 3 | CFLP instance generator (144 instances: 3 sizes × 3 difficulties × 16), seeded with **your student ID** |
 | 4 | Core utilities (`compute_total_cost`, `is_feasible`, greedy initial solution) |
 | **5** | **Tabu Search (TS) implementation** |
 | **6** | **Genetic Algorithm (GA) implementation** |
 | 7 | Gurobi exact solver (`gurobi_solve_cflp`) |
 | 8 | Experiment runner (`run_experiments`) — runs all three methods |
 | 9 | Visualization (`visualize_results`) |
-| 10 | Main execution pipeline |
-| **11** | **Student Configuration** ← edit this section |
+| **10** | **Student Configuration** ← edit this section (`STUDENT_ID`, `GUROBI_VERSION`) |
+| 11 | Main execution pipeline (`main()`) |
 | 12 | Bonus challenges (optional) |
 
 ### Section 5 — Tabu Search
@@ -149,31 +151,89 @@ Key functions:
 
 ### Prerequisites
 
-```bash
-pip install numpy pandas matplotlib seaborn scipy openpyxl gurobipy
-```
+1. **Python Environment:** Python 3.8+
+2. **Required libraries:** numpy, pandas, matplotlib, seaborn, scipy, openpyxl, gurobipy
 
-You also need a valid Gurobi license. Visit [gurobi.com/academia](https://www.gurobi.com/academia/) for a free academic license.
+   ```bash
+   pip install numpy pandas matplotlib seaborn scipy openpyxl gurobipy
+   ```
+
+3. **Gurobi license:**
+   - **Academic license** (recommended): free for students, no size limit. Get it here: https://www.gurobi.com/academia/
+   - **Free license:** limited to 2000 variables and 2000 constraints. Large instances will be skipped for Gurobi (this is acceptable) but are still solved by TS and GA.
 
 ### Step-by-Step
 
-1. **Open** `Assignment_2.ipynb` in Jupyter Lab or VS Code.
-2. **Navigate to Section 11** (Student Configuration) and set:
-   - `GUROBI_VERSION = "academic"` or `"free"` depending on your license.
-   - Adjust TS and GA hyperparameters if needed (defaults are reasonable).
-3. **Run all cells** (Kernel → Restart & Run All).
-4. Wait for all 144 instances to be processed (~10–60 minutes depending on your machine and Gurobi version).
-5. Review the output files described in Section 6.
+#### Step 1: Open the notebook
+Open `Assignment_2.ipynb` in Jupyter Lab or VS Code.
 
-> **Tip**: If you have only the free Gurobi license, set `GUROBI_VERSION = "free"`. Large instances (50 facilities, 100 clients) will be skipped for Gurobi but will still be solved by TS and GA.
+#### Step 2: Update your student information
+Go to **Section 10 (Student Configuration)** and set the two variables:
+
+```python
+# TODO: replace 12345 with YOUR actual student ID (it seeds YOUR unique instances)
+STUDENT_ID = 12345
+
+GUROBI_VERSION = "academic"   # "academic" or "free"
+```
+
+- **`STUDENT_ID`**: your own student ID (e.g., `20231234`). The cell stops with an error if you leave `12345`.
+- **`GUROBI_VERSION`**: `"academic"` if you have an academic license, `"free"` otherwise.
+
+**Example:**
+```python
+STUDENT_ID = 20231234
+GUROBI_VERSION = "academic"
+```
+
+> Your student ID is the random seed of the instance generator: **your instances and your results are unique**, and the ID appears in the name of every output file. Keep the default TS/GA hyperparameters for the main experiment (they can be changed for the bonus challenges only).
+
+#### Step 3: Run all cells
+Select **Kernel → Restart & Run All** (or run the cells one by one from top to bottom with Shift+Enter). The last code cell executes `main()` with your configuration.
+
+#### Step 4: Wait for completion
+- **Estimated time: 10-20 minutes** (depends on your machine and Gurobi license).
+- Progress is displayed instance by instance.
+
+#### Step 5: Check the generated files
+Verify that the output files described in [Section 6](#6-output-files-structure) exist.
+
+#### Step 6: Analyze the results
+Open the CSV/Excel files and the generated plots.
+
+#### Step 7: Answer the questions
+Complete `My_Answers.md` (do **not** edit this guide).
 
 ---
 
 ## 6. Output Files Structure
 
-After running the notebook, the following files will be generated:
+After running the notebook, your working directory contains (for the student ID `20231234`):
 
-### `results_comparison.csv`
+```
+📁 Your_Working_Directory/
+│
+├── 📄 Assignment_2.ipynb                              # Your notebook
+├── 📄 Assignment_2_Student_Guide.md                   # Guide (do not edit)
+├── 📄 My_Answers.md                                   # Your answers (to complete)
+│
+├── 📁 cflp_instances_student_20231234/                # 144 JSON instances (+ preview PNGs)
+├── 📁 convergence_plots_student_20231234/             # One convergence PNG per instance
+├── 📁 visualization_plots_student_20231234/           # 6 summary plots
+│   ├── gap_by_size.png
+│   ├── gap_by_difficulty.png
+│   ├── computation_time.png
+│   ├── speedup_factor.png
+│   ├── ts_vs_ga_scatter.png
+│   └── gap_heatmap.png
+│
+├── 📊 results_student_20231234.csv                    # Raw results (CSV)
+└── 📊 results_student_20231234.xlsx                   # Detailed results (multi-sheet)
+```
+
+**All generated files and folders include your student ID in their name**, which makes your submission easy to identify and verify. The instance files inside `cflp_instances_student_<ID>/` use standard names, but their content depends on your ID.
+
+### `results_student_<ID>.csv`
 
 One row per instance with the following columns:
 
@@ -201,7 +261,7 @@ One row per instance with the following columns:
 | `ga_gap_percent` | GA optimality gap: (ga_cost − gurobi_cost) / gurobi_cost × 100 |
 | `ga_speedup_factor` | gurobi_time / ga_time |
 
-### `results_comparison.xlsx`
+### `results_student_<ID>.xlsx`
 
 Multi-sheet Excel file with:
 - `All Results`: full results table
@@ -209,14 +269,14 @@ Multi-sheet Excel file with:
 - `GA by Size` / `GA by Difficulty`: GA summary statistics
 - `TS Gap Matrix` / `GA Gap Matrix`: mean gap (%) in a size × difficulty pivot table
 
-### `convergence_plots/`
+### `convergence_plots_student_<ID>/`
 
 One PNG per instance showing:
 - **Blue line**: Tabu Search best cost trajectory over iterations
 - **Orange line**: GA best cost trajectory over generations
 - **Red dashed line**: Gurobi optimal cost (reference)
 
-### `visualization_plots/`
+### `visualization_plots_student_<ID>/`
 
 Summary plots across all instances:
 - `gap_by_size.png` — Boxplots of TS and GA gap by instance size
@@ -230,7 +290,7 @@ Summary plots across all instances:
 
 ## 7. Analysis Questions
 
-Answer all questions in **Section 13** of this document. Use **specific numbers from your results** (mean gaps, speedup factors, etc.). Vague answers without data references will not receive full marks.
+Answer all questions in **`My_Answers.md`**. Use **specific numbers from YOUR results** (mean gaps, speedup factors, etc.) and reference the plots by name (e.g., "As shown in `gap_by_size.png`..."). Vague answers without data references will not receive full marks. Explain **why** things happen, not only **what** you observe.
 
 ---
 
@@ -274,7 +334,7 @@ Answer all questions in **Section 13** of this document. Use **specific numbers 
 
 **D2.** If solution quality (minimizing gap) is the **top priority** and time is not a constraint, which approach — TS, GA, or Gurobi — would you recommend for each instance size?
 
-**D3.** The convergence plots show how best cost improves over time. For a typical large instance: at what fraction of the total iterations/generations has TS found its best solution? How about GA? What does this tell you about early stopping?
+**D3.** The convergence plots show how best cost improves over time. For a typical large instance: at what fraction of the total iterations/generations has TS found its best solution? How about GA? What does this tell you about early stopping? *(Use 3-5 convergence plots from `convergence_plots_student_<ID>/` and push them in `sample_convergence_plots/`, see Section 10.)*
 
 ---
 
@@ -317,8 +377,6 @@ These challenges require you to **systematically test all proposed enhancements*
 
 **Step 3 — Full implementation.** Apply your chosen enhancement to the full 144-instance experiment. Compare mean gap and runtime before vs after.
 
-Report in Section 12: (a) screening results for all four options, (b) your selected enhancement and justification, (c) full results (gap and runtime) before and after.
-
 ### Bonus B — Improve Genetic Algorithm (+5%)
 
 **Step 1 — Explore all options.** Run a quick experiment on the small/moderate subset for each of the following enhancements and record the mean gap improvement:
@@ -334,7 +392,21 @@ Report in Section 12: (a) screening results for all four options, (b) your selec
 
 **Step 3 — Full implementation.** Apply your chosen enhancement to the full 144-instance experiment. Compare mean gap and runtime before vs after.
 
-Report in Section 12: (a) screening results for all four options, (b) your selected enhancement and justification, (c) full results (gap and runtime) before and after.
+### 📤 Submission for the Bonus
+
+Push the **additional improved notebook(s)** to your forked repository, in addition to your original notebook:
+
+```
+StudentID_FirstName_LastName_Assignment2_IMPROVED.ipynb
+```
+
+**Example:** `20231234_Ali_Ben_Ahmed_Assignment2_IMPROVED.ipynb`
+
+You may use one improved notebook for both bonuses, or two notebooks (`..._Assignment2_IMPROVED_TS.ipynb` and `..._Assignment2_IMPROVED_GA.ipynb`).
+
+- In the improved notebook, **comment your changes** clearly.
+- **Change the output names** in the Student Configuration cell (e.g., add `_improved` to `RESULTS_FILE`, `CONVERGENCE_PLOTS_FOLDER` and `VISUALIZATION_FOLDER`) so that you do **not overwrite** the results of your original run. Push the improved results files (CSV/XLSX and the visualization folder) too.
+- Report the screening table, the selected enhancement and the before/after results in the **Bonus A / Bonus B** sections of `My_Answers.md`.
 
 ---
 
@@ -354,7 +426,7 @@ Report in Section 12: (a) screening results for all four options, (b) your selec
 
 ### Marking Criteria
 
-- **Full marks**: Data-driven answers that cite specific numbers from results; clear conceptual understanding; insightful analysis.
+- **Full marks**: Data-driven answers that cite specific numbers from YOUR results; clear conceptual understanding; insightful analysis.
 - **Partial marks**: Correct but vague answers without data references; minor conceptual errors.
 - **No marks**: Answers that do not reference results, copy text from the notebook, or are left blank.
 
@@ -362,176 +434,176 @@ Report in Section 12: (a) screening results for all four options, (b) your selec
 
 ## 10. Submission Guidelines
 
-Submit a **single ZIP archive** named `StudentID_Assignment2.zip` containing:
+### Submission = Your Own GitHub Fork
 
-```
-StudentID_Assignment2/
-├── Assignment_2.ipynb          (fully executed notebook with all outputs)
-├── Assignment_2_Student_Guide.md  (this file, with Section 13 fully completed)
-├── results_comparison.csv
-├── results_comparison.xlsx
-├── convergence_plots/          (all convergence PNGs)
-└── visualization_plots/        (all visualization PNGs)
+You do **not** submit a ZIP file. Instead, you work in **your own fork** of the course repository and submit **the link to your fork** on Blackboard.
+
+### Step 1: Fork and rename the repository
+
+1. Sign in to GitHub (create a free account if needed).
+2. Open the course repository: https://github.com/makopt/OA_Assignment_2_481
+3. Click **Fork** (top-right) → **Create fork**.
+4. In your fork, go to **Settings → General → Repository name** and rename it to:
+
+   ```
+   OA_Assignment_2_481_StudentID_FirstName_LastName
+   ```
+
+   **Example:** `OA_Assignment_2_481_20231234_Ali_Ben_Ahmed`
+
+5. Clone **your fork** (not the original) to your computer:
+
+   ```bash
+   git clone https://github.com/<your-username>/OA_Assignment_2_481_20231234_Ali_Ben_Ahmed.git
+   ```
+
+> Keep the fork **public** (GitHub does not allow a fork of a public repository to be made private), so that the instructors can open it without extra access.
+
+### Step 2: Do the work inside your cloned fork
+
+Complete the assignment as described in this guide. Save everything inside the cloned folder.
+
+### Step 3: Commit and push your work
+
+```bash
+git add Assignment_2.ipynb My_Answers.md results_student_*.csv results_student_*.xlsx visualization_plots_student_* sample_convergence_plots
+git commit -m "Assignment 2 - <StudentID> <FirstName LastName>"
+git push origin main
 ```
 
-> **Important**: The notebook must show all cell outputs (do not clear outputs before submitting). Notebooks that have not been run will not be graded.
+Then refresh your repository page on GitHub and check that all files are visible and that the notebook shows its outputs.
+
+### What Your Repository Must Contain
+
+1. ✅ **Completed Jupyter notebook:** `Assignment_2.ipynb`
+   - All cells executed successfully, with all outputs visible (do not clear the outputs)
+   - Your own student ID set in the Student Configuration cell
+
+2. ✅ **Completed answers file:** `My_Answers.md`
+   - All questions (Sections A-F) answered completely
+   - Your student ID and name at the top
+   - Do not modify `Assignment_2_Student_Guide.md`
+
+3. ✅ **Results files:**
+   - `results_student_{YOUR_ID}.csv`
+   - `results_student_{YOUR_ID}.xlsx`
+
+4. ✅ **Key visualizations:**
+   - All 6 files from `visualization_plots_student_{YOUR_ID}/`
+
+5. ✅ **Sample convergence plots** (needed for question D3): 3-5 plots in `sample_convergence_plots/`
+
+6. ❌ **DO NOT push:**
+   - Instance files (`cflp_instances_student_*` folder - too large)
+   - The full convergence-plots folder (`convergence_plots_student_*` - too large)
+
+7. ✅ **BONUS (Optional - up to +10%):**
+   - `StudentID_FirstName_LastName_Assignment2_IMPROVED.ipynb` (your improved TS and/or GA version)
+   - Results of the improved version (with different file names, see [Section 8](#8-bonus-challenges-optional--up-to-10-extra-credit))
+
+**Expected repository content:**
+```
+OA_Assignment_2_481_20231234_Ali_Ben_Ahmed/
+├── Assignment_2.ipynb
+├── Assignment_2_Student_Guide.md (unchanged)
+├── My_Answers.md (your answers)
+├── results_student_20231234.csv
+├── results_student_20231234.xlsx
+├── visualization_plots_student_20231234/
+│   ├── gap_by_size.png
+│   ├── gap_by_difficulty.png
+│   ├── computation_time.png
+│   ├── speedup_factor.png
+│   ├── ts_vs_ga_scatter.png
+│   └── gap_heatmap.png
+└── sample_convergence_plots/ (3-5 plots for D3)
+```
+
+> Tip: the repository already contains a `.gitignore` that excludes the generated instance and convergence-plot folders. Check `git status` before committing to be sure nothing large is added.
+
+### Submission Checklist
+
+Before submitting the link, verify:
+
+- [ ] You forked the repository and renamed it `OA_Assignment_2_481_StudentID_FirstName_LastName`
+- [ ] Your own student ID is used in the notebook (NOT someone else's!)
+- [ ] All cells in the notebook executed successfully and the outputs are visible
+- [ ] All questions of this guide are answered completely in `My_Answers.md`
+- [ ] Specific numerical values from YOUR results are included
+- [ ] Plots are referenced in your answers
+- [ ] All required files are committed and **pushed** (visible on GitHub in your browser)
+- [ ] The repository is public and the link opens without logging in (test it in a private/incognito window)
+
+### Submission Platform
+
+Submit via: **Blackboard, on the dedicated rubric**
+
+**What to submit on Blackboard:** the **link (URL) of your forked repository**, e.g.
+`https://github.com/<your-username>/OA_Assignment_2_481_20231234_Ali_Ben_Ahmed`
+
+**Deadline:** December 05, 2026, 11:59 PM
+
+> The deadline applies to your **last commit**. Commits pushed after the deadline are considered late.
+
+**Late Policy:** Late submissions will be graded 0, no exceptions (plan ahead!)
 
 ---
 
 ## 11. Academic Integrity
 
-- All submitted work must be your own.
-- You may discuss concepts with classmates, but **do not share code or written answers**.
-- Suspected plagiarism will be handled according to university policy and may result in a mark of 0.
-- AI tools (ChatGPT, GitHub Copilot, etc.) may be used to **understand** algorithms but the written analysis in Section 13 must reflect **your own results** from running the notebook.
+⚠️ **Your student ID ensures unique results!**
+- The instances are generated with your student ID as the random seed, so each student has DIFFERENT instances and numerical results.
+- Copying results from classmates is EASILY detected.
+- Focus on YOUR analysis and interpretation.
 
+✅ **Acceptable collaboration:**
+- Discussing general concepts and algorithms
+- Helping each other with technical issues (installation, errors)
 
----
+❌ **NOT acceptable:**
+- Copying numerical results or written answers from classmates
+- Sharing code modifications
+- Using another student's generated files
 
-## 12. Your Analysis and Answers
+AI tools (ChatGPT, GitHub Copilot, etc.) may be used to **understand** the algorithms, but the written analysis must reflect **your own results** from running the notebook.
 
-> **Instructions**: Replace each *[Your answer here]* placeholder with your own analysis. Use specific numbers from `results_comparison.csv` and the generated plots. Answers should be written in complete sentences. Bullet points are acceptable for structured comparisons.
-
----
-
-### Section A: Solution Quality Analysis (4 marks)
-
-#### A1. Overall Mean Optimality Gap
-
-*[Report the mean gap (%) for TS and GA across all instances where Gurobi found an optimal solution. State which method achieves lower gap.]*
-
-#### A2. Gap by Instance Size
-
-*[Report mean TS gap and GA gap for small, medium, and large instances. Describe the trend and compare between TS and GA.]*
-
-#### A3. Gap by Difficulty Level
-
-*[Report mean TS gap and GA gap for easy, moderate, and expensive instances. Identify which difficulty is hardest for each method and explain why.]*
-
-#### A4. TS vs GA Head-to-Head (ts_vs_ga_scatter.png)
-
-*[State what fraction of instances TS outperforms GA (point is below the diagonal). Identify instance types (if any) where one method consistently dominates.]*
+**Consequences:** Violations of academic integrity result in zero marks for the assignment, a report to academic affairs, and possible disciplinary action.
 
 ---
 
-### Section B: Computational Efficiency Analysis (4 marks)
+## 12. Getting Help
 
-#### B1. Computation Time and TS Speedup
+**Installation problems:**
+- Check your Python version (3.8+)
+- Try: `pip install --upgrade gurobipy numpy pandas matplotlib seaborn scipy openpyxl`
 
-*[Report mean Gurobi time, TS time, and GA time for each size. Report the TS speedup factor on large instances.]*
+**Gurobi license issues:**
+- Academic license: https://www.gurobi.com/academia/
+- Free version: set `GUROBI_VERSION = "free"` in the Student Configuration cell
 
-#### B2. GA Speedup vs TS Speedup
+**Memory errors:**
+- Close other applications; use a machine with 8GB+ RAM if possible
 
-*[Report mean GA speedup factor across all sizes. Compare to TS speedup.]*
+**Long runtime:**
+- 10-20 minutes is normal. If it takes much longer, check your hardware or Gurobi license.
 
-#### B3. Gurobi Time Growth vs Metaheuristic Time Growth
-
-*[Describe how much Gurobi time increases from small → medium → large. Compare to TS and GA time growth.]*
-
-#### B4. Best Balance of Quality and Speed
-
-*[State which method offers the best quality-speed balance. Reference specific gap and time values.]*
-
----
-
-### Section C: Scalability Analysis (3 marks)
-
-#### C1. Gap Heatmap Analysis (gap_heatmap.png)
-
-*[Identify the (size, difficulty) cell with the highest TS gap and the cell with the highest GA gap. Interpret what this means.]*
-
-#### C2. Expected Scalability to Very Large Instances
-
-*[State whether TS or GA is expected to scale better to very large instances. Justify using algorithmic complexity and your observed results.]*
-
-#### C3. Validity of Gap Measurements When Gurobi Hits Time Limit
-
-*[Explain how gap validity is affected when Gurobi does not prove optimality. Suggest a better benchmark.]*
+**GitHub problems (fork, rename, push):**
+- Check that you cloned **your fork**, not the original repository
+- Check `git status` and that `git push origin main` finished without errors
+- If you still have a problem, contact me by email.
 
 ---
 
-### Section D: Quality-Time Tradeoff Analysis (3 marks)
+# 13. YOUR ANALYSIS AND ANSWERS
 
-#### D1. Best Method for 10-Second Time Budget (Medium Instances)
+Your answers go in a **separate file**, `My_Answers.md`, which is provided in the repository as a template (student information, Sections A-F, bonus sections, additional comments and declaration).
 
-*[State your recommendation (TS or GA) for a 10-second time budget on medium instances. Cite mean times and gaps.]*
-
-#### D2. Best Method When Quality Is Top Priority (per size)
-
-*[State your recommendation for each size (small / medium / large) when solution quality is paramount and time is not a constraint.]*
-
-#### D3. Convergence Timing in Convergence Plots
-
-*[For a typical large instance, at what fraction of total iterations (TS) and generations (GA) is the best solution found? What does this imply about early stopping?]*
+- Fill in `My_Answers.md` — do **not** write your answers in this guide.
+- Keep this guide (`Assignment_2_Student_Guide.md`) unchanged.
+- Fill in your student ID and name at the top of `My_Answers.md`.
 
 ---
 
-### Section E: Algorithm Understanding (3 marks)
+**END OF ASSIGNMENT DOCUMENT**
 
-#### E1. Tabu Search: Tabu List and Aspiration Criterion
-
-*[Explain in your own words how the tabu list prevents cycling. Explain the aspiration criterion. Give a concrete CFLP example of a tabu move and when aspiration would override it.]*
-
-#### E2. Genetic Algorithm: Repair Operator and Crossover
-
-*[Explain how the repair operator ensures feasibility and what would happen without it. Describe how uniform crossover combines two parent CFLP solutions.]*
-
-#### E3. Trajectory-based vs Population-based Exploration
-
-*[Explain what trajectory-based (TS) and population-based (GA) mean for exploration. State key advantages and disadvantages of each paradigm for CFLP.]*
-
----
-
-### Section F: Critical Reflection (3 marks)
-
-#### F1. Most Important TS Hyperparameters
-
-*[Name the three most important TS hyperparameters. Discuss how the defaults affected your results and what you would change.]*
-
-#### F2. Most Important GA Hyperparameters
-
-*[Name the three most important GA hyperparameters. Discuss how increasing population_size and max_generations would affect quality and runtime.]*
-
-#### F3. Proposed Algorithmic Improvements
-
-*[Propose one concrete improvement for TS and one for GA. Justify each based on theoretical properties and your observed results.]*
-
----
-
-### Bonus A: TS Improvement (if attempted)
-
-**(a) Screening results — one row per enhancement tested on the small/moderate subset:**
-
-| Enhancement tested | Mean gap before (%) | Mean gap after (%) | Improvement |
-|-------------------|--------------------|--------------------|-------------|
-| Adaptive tenure | | | |
-| Aspiration+ criterion | | | |
-| Frequency-based memory | | | |
-| Diversification restart | | | |
-
-**(b) Selected enhancement:** *[Name the enhancement you chose and explain why it gave the best improvement.]*
-
-**(c) Full 144-instance results:**
-- Mean gap before enhancement: *[value]* %
-- Mean gap after enhancement: *[value]* %
-- Mean runtime before: *[value]* s — after: *[value]* s
-
----
-
-### Bonus B: GA Improvement (if attempted)
-
-**(a) Screening results — one row per enhancement tested on the small/moderate subset:**
-
-| Enhancement tested | Mean gap before (%) | Mean gap after (%) | Improvement |
-|-------------------|--------------------|--------------------|-------------|
-| Adaptive mutation | | | |
-| Two-point crossover | | | |
-| Memetic GA (TS + GA) | | | |
-| Diversity preservation | | | |
-
-**(b) Selected enhancement:** *[Name the enhancement you chose and explain why it gave the best improvement.]*
-
-**(c) Full 144-instance results:**
-- Mean gap before enhancement: *[value]* %
-- Mean gap after enhancement: *[value]* %
-- Mean runtime before: *[value]* s — after: *[value]* s
+*Please ensure `My_Answers.md` is completed before submission. Good luck!*
